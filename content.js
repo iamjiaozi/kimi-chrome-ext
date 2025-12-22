@@ -23,8 +23,8 @@
     container.id = 'kne-panel';
     container.style.position = 'fixed';
     container.style.zIndex = '2147483646';
-    container.style.right = '12px';
-    container.style.top = '80px';
+    container.style.right = '80px';
+    container.style.top = '10px';
     container.style.width = '320px';
     container.style.pointerEvents = 'auto';
 
@@ -67,7 +67,7 @@
     header.className = 'header';
     const title = document.createElement('div');
     title.className = 'title';
-    title.textContent = '本次会话问题 0.01';
+    title.textContent = '本次会话问题 0.02';
     const toggle = document.createElement('button');
     toggle.className = 'toggle';
     toggle.textContent = '收起';
@@ -158,7 +158,8 @@
 
   function jumpTo(it) {
     if (!it || !it.el || !document.body.contains(it.el)) return;
-    it.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // 使用 auto 替代 smooth，解决部分场景下向下滚动定位无效的问题
+    it.el.scrollIntoView({ behavior: 'auto', block: 'center' });
     try {
       it.el.classList.add('kne-highlight');
       setTimeout(() => it.el && it.el.classList.remove('kne-highlight'), 1500);
