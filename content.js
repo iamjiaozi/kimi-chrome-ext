@@ -82,6 +82,43 @@
 
     header.appendChild(title);
     header.appendChild(toggle);
+
+    // 拖拽逻辑
+    let isDragging = false;
+    let startX, startY, startRight, startTop;
+
+    header.addEventListener('mousedown', (e) => {
+      // 如果点击的是 toggle 按钮，不触发拖拽
+      if (e.target.closest('.toggle')) return;
+      
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      
+      const rect = container.getBoundingClientRect();
+      // 计算 right 值 (window.innerWidth - rect.right)
+      startRight = window.innerWidth - rect.right;
+      startTop = rect.top;
+      
+      // 防止选中文本
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      
+      const deltaX = e.clientX - startX;
+      const deltaY = e.clientY - startY;
+      
+      // 因为是 right 定位，向右移动 right 变小，向左移动 right 变大
+      // deltaX > 0 (向右)，right 应该减小
+      container.style.right = `${startRight - deltaX}px`;
+      container.style.top = `${startTop + deltaY}px`;
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
     
     const body = document.createElement('div');
     body.className = 'body';
