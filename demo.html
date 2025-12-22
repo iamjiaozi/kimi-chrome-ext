@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>kimi网页增强助手 · Demo</title>
+    <link rel="stylesheet" href="content.css" />
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f3f4f6; margin: 0; }
+      .page { max-width: 860px; margin: 32px auto; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; }
+      .toolbar { display: flex; gap: 8px; margin-bottom: 12px; }
+      .btn { border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px 12px; background: #f8fafc; cursor: pointer; }
+      .btn:hover { background: #eef2ff; }
+      .thread { display: flex; flex-direction: column; gap: 16px; }
+      .user-content { border: 1px solid #d1d5db; border-radius: 8px; padding: 12px; }
+      .assistant { border: 1px dashed #d1d5db; border-radius: 8px; padding: 12px; background: #fcfcfc; color: #374151; }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <h2>kimi 会话页面（模拟）</h2>
+      <div class="toolbar">
+        <button class="btn" id="add">新增用户问题</button>
+      </div>
+      <div class="thread" id="thread">
+        <div class="user-content">我如何使用 Manifest V3 开发一个 Chrome 插件？</div>
+        <div class="assistant">（助手回答）Manifest V3 需要使用 service worker 取代 background 页……</div>
+        <div class="user-content">如何在 SPA 页面中可靠地监听 DOM 的变化？</div>
+        <div class="assistant">（助手回答）可以借助 MutationObserver 观察子树变化并增量处理……</div>
+      </div>
+    </div>
+    <script>
+      const thread = document.getElementById('thread');
+      const btn = document.getElementById('add');
+      let n = 1;
+      btn.addEventListener('click', () => {
+        const el = document.createElement('div');
+        el.className = 'user-content';
+        el.textContent = `新增的问题示例 #${n++}：请解释一下内容脚本与页面脚本的差异？`;
+        thread.appendChild(el);
+      });
+    </script>
+    <script src="content.js"></script>
+  </body>
+  </html>
+
