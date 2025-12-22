@@ -68,7 +68,7 @@
         log('调试模式开启：鼠标离开面板，但不自动隐藏');
         return;
       }else{
-        updateState(true);
+        updateState(true);  // 隐藏
       }
     });
     const input = document.createElement('input');

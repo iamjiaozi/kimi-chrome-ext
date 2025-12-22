@@ -1,8 +1,7 @@
 /* 高亮用户问题：点击侧边面板项后短暂闪烁 */
 .kne-highlight {
-  outline: 2px solid rgba(255, 183, 67, 0.08); /* indigo-600 */
-  background: rgba(255, 183, 67, 0.08);
-  transition: background 300ms ease-in-out;
+  outline: 2px solid #cccccc; /* indigo-600 */
+  transition: #ffffff 300ms ease-in-out;
   border-radius: 8px;
 }
 
