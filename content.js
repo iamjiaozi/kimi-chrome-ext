@@ -70,11 +70,24 @@
     title.textContent = '本次会话问题 0.02';
     const toggle = document.createElement('button');
     toggle.className = 'toggle';
-    toggle.textContent = '收起';
-    toggle.addEventListener('click', () => {
-      state.ui.collapsed = !state.ui.collapsed;
-      wrap.classList.toggle('collapsed', state.ui.collapsed);
-      toggle.textContent = state.ui.collapsed ? '展开' : '收起';
+    toggle.textContent = '展开';
+    
+    const updateState = (collapsed) => {
+      state.ui.collapsed = collapsed;
+      wrap.classList.toggle('collapsed', collapsed);
+      toggle.textContent = collapsed ? '展开' : '收起';
+    };
+
+    // 初始状态为收起
+    state.ui.collapsed = true;
+    wrap.classList.add('collapsed');
+
+    wrap.addEventListener('mouseenter', () => {
+      updateState(false);
+    });
+
+    wrap.addEventListener('mouseleave', () => {
+      updateState(true);
     });
     const input = document.createElement('input');
     input.className = 'search';
