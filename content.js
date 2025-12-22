@@ -151,9 +151,81 @@
   }
 
   function checkUrl() {
-    if (!state.rootPanel) return;
-    const isChat = window.location.href.includes('/chat/');
-    state.rootPanel.style.display = isChat ? 'block' : 'none';
+    const url = window.location.href;
+    const urlObj = new URL(url);
+    
+    // 1. 处理 Chat Panel
+    if (state.rootPanel) {
+      const isChat = url.includes('/chat/');
+      state.rootPanel.style.display = isChat ? 'block' : 'none';
+    }
+
+    // 2. 处理 Home Panel
+    // 当网址以 www.kimi.com 结尾，后面没有任何内容时候 (pathname 为 / 或空)
+    const isHome = (urlObj.hostname === 'www.kimi.com' || urlObj.hostname === 'kimi.com') && 
+                   (urlObj.pathname === '/' || urlObj.pathname === '');
+    
+    if (isHome) {
+      if (!state.homePanelActive) {
+        state.homePanelActive = true;
+        createAndShowHomePanel();
+      }
+    } else {
+      state.homePanelActive = false;
+      if (state.homePanel) {
+        state.homePanel.remove();
+        state.homePanel = null;
+      }
+    }
+  }
+
+  function createAndShowHomePanel() {
+    if (state.homePanel) return;
+
+    const panel = document.createElement('div');
+    panel.className = 'home-panel';
+    panel.style.position = 'fixed';
+    panel.style.bottom = '20px';
+    panel.style.right = '30px';
+    panel.style.padding = '15px 30px';
+    panel.style.backgroundColor = '#f8fafc';
+    panel.style.color = '#000';
+    panel.style.borderRadius = '8px';
+    panel.style.fontSize = '14px';
+    panel.style.zIndex = '2147483647';
+    panel.style.pointerEvents = 'none'; // 不阻挡点击
+    panel.style.transition = 'all 0.5s ease';
+    panel.style.lineHeight = '2.0';
+    
+    // 初始状态：透明且向下偏移
+    panel.style.opacity = '0';
+    panel.style.transform = 'translateY(20px)';
+    
+    panel.innerHTML = '欢迎使用 kimi 助手 v1.0</br>主要功能：历史问题跳转';
+
+    document.body.appendChild(panel);
+    state.homePanel = panel;
+
+    // 触发重绘以应用过渡效果
+    requestAnimationFrame(() => {
+      panel.style.opacity = '1';
+      panel.style.transform = 'translateY(0)';
+    });
+
+    // 3秒后消失
+    setTimeout(() => {
+      if (state.homePanel === panel) {
+        panel.style.opacity = '0';
+        panel.style.transform = 'translateY(20px)';
+        // 等待动画结束后移除
+        setTimeout(() => {
+          if (state.homePanel === panel) {
+            panel.remove();
+            state.homePanel = null;
+          }
+        }, 500);
+      }
+    }, 3000);
   }
 
   function textOf(el) {
