@@ -141,9 +141,19 @@
     state.ui.inputEl = input;
     state.ui.toggleEl = toggle;
     state.panel = container;
+    state.rootPanel = rootPanel;
     
     rootPanel.appendChild(container);
     document.body.appendChild(rootPanel);
+
+    // 初始化时检查 URL
+    checkUrl();
+  }
+
+  function checkUrl() {
+    if (!state.rootPanel) return;
+    const isChat = window.location.href.includes('/chat/');
+    state.rootPanel.style.display = isChat ? 'block' : 'none';
   }
 
   function textOf(el) {
@@ -215,6 +225,12 @@
     indexQuestions();
     renderList();
 
+    // 监听 URL 变化
+    // 由于 SPA 页面切换可能不会触发 popstate，需要 patch pushState/replaceState 或使用 MutationObserver 辅助
+    // 这里简单起见，使用 MutationObserver 并在每次变化时检查 URL
+    // 也可以监听 popstate
+    window.addEventListener('popstate', checkUrl);
+
     // 打印第一个 .segment-container 的宽度
     const segmentContainer = document.querySelector('.segment-container');
     if (segmentContainer) {
@@ -245,6 +261,10 @@
     // 观察 DOM 变化，动态更新
     const observer = new MutationObserver((mutations) => {
       let changed = false;
+      
+      // 每次 DOM 变化都检查一次 URL
+      checkUrl();
+
       for (const m of mutations) {
         if (m.type === 'childList') {
           m.addedNodes && m.addedNodes.forEach((n) => {
