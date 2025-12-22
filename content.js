@@ -67,7 +67,7 @@
     header.className = 'header';
     const title = document.createElement('div');
     title.className = 'title';
-    title.textContent = '问题列表2';
+    title.textContent = '问题列表';
     const toggle = document.createElement('button');
     toggle.className = 'toggle';
     toggle.textContent = '展开';
