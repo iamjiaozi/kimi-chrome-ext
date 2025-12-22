@@ -4,7 +4,7 @@
 
   const state = {
     DEBUG: true, // 调试模式开关
-    // DEBUG: false, // 注释掉打开 DEBUG 
+    DEBUG: false, // 注释掉打开 DEBUG 
     items: [], // { id, text, el }
     elToId: new WeakMap(),
     panel: null,
@@ -47,12 +47,12 @@
     title.textContent = '问题列表';
     const toggle = document.createElement('button');
     toggle.className = 'toggle';
-    toggle.textContent = '展开';
+    toggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" width="1em" height="1em" viewBox="0 0 1024 1024" name="Down_b" class="iconify expand-icon"><path d="M482.95936 717.33248a36.864 36.864 0 0 0 52.0192-0.08192l285.696-285.696a36.864 36.864 0 1 0-52.10112-52.10112l-259.72736 259.6864-261.69344-259.80928a36.864 36.864 0 1 0-51.93728 52.34688l287.744 285.65504z" fill="currentColor"></path></svg>`;
     
     const updateState = (collapsed) => {
       state.ui.collapsed = collapsed;
       wrap.classList.toggle('collapsed', collapsed);
-      toggle.textContent = collapsed ? '展开' : '收起';
+      toggle.classList.toggle('collapsed', collapsed);
     };
 
     // 初始状态为收起
