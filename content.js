@@ -25,7 +25,7 @@
     rootPanel.className = 'root-panel';
     rootPanel.style.position = 'fixed';
     rootPanel.style.zIndex = '2147483646';
-    rootPanel.style.right = '180px';
+    rootPanel.style.right = '180px';  // 默认值是 180px
     rootPanel.style.top = '20px';
     rootPanel.style.width = '280px';
     rootPanel.style.pointerEvents = 'auto';
