@@ -1,7 +1,12 @@
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
 /* 高亮用户问题：点击侧边面板项后短暂闪烁 */
 .kne-highlight {
-  outline: 2px solid #cccccc; /* indigo-600 */
-  transition: #ffffff 300ms ease-in-out;
-  border-radius: 8px;
+  
+  animation: flash 0.5s 1; /* 一次0.2s，共10次 → 总时长2s */
+  animation-fill-mode: forwards; /* 动画结束后保持最后一帧（opacity:1）*/  
 }
 

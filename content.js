@@ -54,6 +54,7 @@
       wrap.classList.toggle('collapsed', collapsed);
       toggle.classList.toggle('collapsed', collapsed);
     };
+    state.ui.setCollapsed = updateState;
 
     // 初始状态为收起
     state.ui.collapsed = true;
@@ -67,10 +68,10 @@
       if (state.DEBUG) {
         log('调试模式开启：鼠标离开面板，但不自动隐藏');
         return;
-      }else{
-        updateState(true);  // 隐藏
       }
+      updateState(true);
     });
+
     const input = document.createElement('input');
     input.className = 'search';
     input.placeholder = '搜索';
@@ -160,6 +161,10 @@
       it.el.classList.add('kne-highlight');
       setTimeout(() => it.el && it.el.classList.remove('kne-highlight'), 1500);
     } catch {}
+
+    if (state.ui.setCollapsed) {
+      state.ui.setCollapsed(true);
+    }
   }
 
   function init() {
