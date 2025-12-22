@@ -6,7 +6,7 @@
 /* 高亮用户问题：点击侧边面板项后短暂闪烁 */
 .kne-highlight {
   
-  animation: flash 0.5s 1; /* 一次0.2s，共10次 → 总时长2s */
+  animation: flash 0.8s 1; /* 一次0.2s，共10次 → 总时长2s */
   animation-fill-mode: forwards; /* 动画结束后保持最后一帧（opacity:1）*/  
 }
 

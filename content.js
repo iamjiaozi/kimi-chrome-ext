@@ -28,7 +28,7 @@
     container.style.right = '180px';
     //container.style.transform='translateX(-50%)';
     container.style.top = '20px';//20px
-    container.style.width = '320px';
+    container.style.width = '280px';
     container.style.pointerEvents = 'auto';
 
     const shadow = container.attachShadow({ mode: 'open' });
