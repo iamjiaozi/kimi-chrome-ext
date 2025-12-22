@@ -10,7 +10,7 @@
     {
       "matches": ["*://www.kimi.com/*"],
       "js": ["content.js"],
-      "css": ["demo.css"],
+      "css": ["content.css"],
       "run_at": "document_idle"
     }
   ],
