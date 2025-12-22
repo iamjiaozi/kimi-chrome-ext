@@ -21,15 +21,19 @@
   console.debug('[kimi增强助手] 内容脚本已加载');
 
   function createPanel() {
+    const rootPanel = document.createElement('div');
+    rootPanel.className = 'root-panel';
+    rootPanel.style.position = 'fixed';
+    rootPanel.style.zIndex = '2147483646';
+    rootPanel.style.right = '180px';
+    rootPanel.style.top = '20px';
+    rootPanel.style.width = '280px';
+    rootPanel.style.pointerEvents = 'auto';
+
     const container = document.createElement('div');
     container.id = 'kne-panel';   // kne-pannel
-    container.style.position = 'fixed';
-    container.style.zIndex = '2147483646';
-    container.style.right = '180px';
-    //container.style.transform='translateX(-50%)';
-    container.style.top = '20px';//20px
-    container.style.width = '280px';
-    container.style.pointerEvents = 'auto';
+    container.style.width = '100%';
+    container.style.height = '100%';
 
     const shadow = container.attachShadow({ mode: 'open' });
 
@@ -95,7 +99,7 @@
       startX = e.clientX;
       startY = e.clientY;
       
-      const rect = container.getBoundingClientRect();
+      const rect = rootPanel.getBoundingClientRect();
       // 计算 right 值 (window.innerWidth - rect.right)
       startRight = window.innerWidth - rect.right;
       startTop = rect.top;
@@ -112,8 +116,8 @@
       
       // 因为是 right 定位，向右移动 right 变小，向左移动 right 变大
       // deltaX > 0 (向右)，right 应该减小
-      container.style.right = `${startRight - deltaX}px`;
-      container.style.top = `${startTop + deltaY}px`;
+      rootPanel.style.right = `${startRight - deltaX}px`;
+      rootPanel.style.top = `${startTop + deltaY}px`;
     });
 
     document.addEventListener('mouseup', () => {
@@ -137,7 +141,9 @@
     state.ui.inputEl = input;
     state.ui.toggleEl = toggle;
     state.panel = container;
-    document.body.appendChild(container);
+    
+    rootPanel.appendChild(container);
+    document.body.appendChild(rootPanel);
   }
 
   function textOf(el) {
@@ -208,6 +214,33 @@
     createPanel();
     indexQuestions();
     renderList();
+
+    // 打印第一个 .segment-container 的宽度
+    const segmentContainer = document.querySelector('.segment-container');
+    if (segmentContainer) {
+      const rect = segmentContainer.getBoundingClientRect();
+      console.log('Width of first .segment-container:', rect.width);
+    } else {
+      console.log('.segment-container not found');
+    }
+
+    // 打印第一个 .chat-content-list 的宽度
+    const chatContentList = document.querySelector('div.chat-content-list');
+    if (chatContentList) {
+      const rect = chatContentList.getBoundingClientRect();
+      console.log('Width of first .chat-content-list:', rect.width);
+    } else {
+      console.log('.chat-content-list not found');
+    }
+
+    // 打印 #page-layout-container 的宽度
+    const pageLayoutContainer = document.getElementById('page-layout-container');
+    if (pageLayoutContainer) {
+      const rect = pageLayoutContainer.getBoundingClientRect();
+      console.log('Width of #page-layout-container:', rect.width);
+    } else {
+      console.log('#page-layout-container not found');
+    }
 
     // 观察 DOM 变化，动态更新
     const observer = new MutationObserver((mutations) => {
