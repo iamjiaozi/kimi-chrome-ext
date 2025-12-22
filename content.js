@@ -3,6 +3,8 @@
   window.__kimiEnhancerInitialized = true;
 
   const state = {
+    DEBUG: true, // 调试模式开关
+    // DEBUG: false, // 注释掉打开 DEBUG 
     items: [], // { id, text, el }
     elToId: new WeakMap(),
     panel: null,
@@ -20,13 +22,12 @@
 
   function createPanel() {
     const container = document.createElement('div');
-    container.id = 'kne-panel';
+    container.id = 'kne-panel';   // kne-pannel
     container.style.position = 'fixed';
     container.style.zIndex = '2147483646';
-    //container.style.left = '50%';
-    container.style.right = '40px';
+    container.style.right = '180px';
     //container.style.transform='translateX(-50%)';
-    container.style.top = '20px';
+    container.style.top = '20px';//20px
     container.style.width = '320px';
     container.style.pointerEvents = 'auto';
 
@@ -63,7 +64,12 @@
     });
 
     wrap.addEventListener('mouseleave', () => {
-      updateState(true);
+      if (state.DEBUG) {
+        log('调试模式开启：鼠标离开面板，但不自动隐藏');
+        return;
+      }else{
+        updateState(true);
+      }
     });
     const input = document.createElement('input');
     input.className = 'search';
@@ -138,8 +144,8 @@
       text.textContent = it.text;
       const meta = document.createElement('div');
       meta.className = 'meta';
-      //meta.textContent = `#${idx + 1} · ${it.id}`;  // 问题 html id 位置
       meta.textContent = ``;
+      // meta.textContent = `#${idx + 1} · ${it.id}`;  // 问题 html id 位置
       item.appendChild(text);
       item.appendChild(meta);
       state.ui.listEl.appendChild(item);
