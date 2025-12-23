@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "kimi网页增强助手",
+  "name": "kimi会话助手",
   "version": "0.1.0",
-  "description": "在浏览 www.kimi.com 时增强会话体验：收集用户问题并提供快速跳转。",
+  "description": "使用 www.kimi.com 时增强会话体验：显示用户问题并快速跳转。",
   "host_permissions": [
     "*://www.kimi.com/*"
   ],
