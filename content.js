@@ -201,7 +201,7 @@
     panel.style.opacity = '0';
     panel.style.transform = 'translateY(20px)';
     
-    panel.innerHTML = '欢迎使用 kimi 助手 v1.0</br>主要功能：历史问题跳转';
+    panel.innerHTML = 'kimi 会话助手 - 快速定位多轮问题';
 
     document.body.appendChild(panel);
     state.homePanel = panel;

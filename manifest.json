@@ -1,8 +1,22 @@
 {
   "manifest_version": 3,
-  "name": "kimi会话助手",
-  "version": "0.1.0",
-  "description": "使用 www.kimi.com 时增强会话体验：显示用户问题并快速跳转。",
+  "name": "kimi 会话助手 - 快速定位多轮问题",
+  "version": "0.0.1",
+  "description": "为 kimi 增加会话内多轮问题显示和跳转",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },  
+  "action": {
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },  
   "host_permissions": [
     "*://www.kimi.com/*"
   ],
